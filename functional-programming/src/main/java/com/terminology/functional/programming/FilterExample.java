@@ -17,6 +17,7 @@ public class FilterExample {
 			}
 		}
 		//functional style
+		System.out.println("Functional Style..");
 		list.stream().filter((name)-> {
 			return !name.equals("sekhar");
 		})
