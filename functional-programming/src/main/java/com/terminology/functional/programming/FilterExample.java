@@ -7,6 +7,11 @@ import java.util.function.Predicate;
 
 public class FilterExample {
 
+	
+	private static boolean isNotSekahr(String name){
+		return !name.equals("sekhar");
+	}
+	
 	public static void main(String args[]){
 
 		List<String> list = Arrays.asList("raja","sekhar","java","devaansh","terminology");
@@ -17,10 +22,16 @@ public class FilterExample {
 			}
 		}
 		//functional style
-		System.out.println("Functional Style..");
+		/*System.out.println("Functional Style..");
 		list.stream().filter((name)-> {
 			return !name.equals("sekhar");
 		})
-		.forEach((name)->System.out.println(name));
+		.forEach((name)->System.out.println(name));*/
+		
+		System.out.println("Functional Style..");
+		list.stream().filter(FilterExample::isNotSekahr)
+		.forEach(System.out::println);
+		
+		
 	}
 }
