@@ -8,17 +8,7 @@ import java.util.function.Predicate;
 public class FilterExample {
 
 	
-	/*A stream represents a sequence of elements and supports different kind of operations 
-	to perform computations upon collections/elements
-	Stream operations are either intermediate or terminal. 
-	Intermediate operations return a stream so we can chain multiple intermediate operations without using semicolons. 
-	Terminal operations are either void or return a non-stream result.
-	
-	Streams can be created from various data sources, especially collections. 
-	Lists and Sets support new methods stream() and parallelStream() to either create a sequential or a parallel stream. 
-	Parallel streams are capable of operating on multiple threads
-	*/
-	
+
 	private static boolean isNotSekahr(String name){
 		return !name.equals("sekhar");
 	}
