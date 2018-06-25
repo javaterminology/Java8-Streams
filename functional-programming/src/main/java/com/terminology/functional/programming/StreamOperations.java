@@ -2,6 +2,7 @@ package com.terminology.functional.programming;
 
 import java.util.Arrays;
 import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -132,7 +133,7 @@ public class StreamOperations {
 	    })
 	    .forEach(s -> System.out.println("forEach: " + s));
 		
-		
+		System.out.println("****************************************************");
 		//Java 8 streams cannot be reused. As soon as you call any terminal operation the stream is closed:
 		
 		Stream<String> stream =
@@ -140,6 +141,16 @@ public class StreamOperations {
 			        .filter(s -> s.startsWith("a"));
 
 			stream.anyMatch(s -> true);    // ok
-			stream.noneMatch(s -> true);   // exception
+			stream.noneMatch(s -> true);   // java.lang.IllegalStateException: stream has already been operated upon or closed
+			
+		/*To overcome this limitation we have to to create a new stream chain for every intermediate operation we want to execute
+		 * e.g. we could create a stream supplier to construct a new stream with all intermediate operations already set up
+		 *Supplier is a functional interface with only one abstract method get() */	
+		Supplier<Stream<String>> streamSupplier =
+				    () -> Stream.of("d2", "a2", "b1", "b3", "c")
+				            .filter(s -> s.startsWith("a"));
+
+				streamSupplier.get().anyMatch(s -> true);   // ok
+				streamSupplier.get().noneMatch(s -> true);  // ok
 	}
 }
