@@ -28,7 +28,7 @@ public class MapperExample {
 				System.out.println(name);
 			}
 		}
-		//map is used transform object one type to another type.
+		//map is used transform the object one type to another type.
 		//terminal operation used to terminate the stream.
 
 		System.out.println("<< Functional Style >>");
