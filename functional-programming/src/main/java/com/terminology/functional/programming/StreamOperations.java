@@ -80,5 +80,66 @@ public class StreamOperations {
 			System.out.println(s);
 			return s.startsWith("A");
 		}).forEach(System.out::println);
+		
+		System.out.println("****************************************************");
+		/*As you might have guessed both map and filter are called five times for every string in the underlying collection whereas forEach is only called once.
+		We can greatly reduce the actual number of executions if we change the order of the operations, moving filter to the beginning of the chain:*/
+		Stream.of("d2", "a2", "b1", "b3", "c")
+		.filter(s->{
+			System.out.println(s);
+			return s.startsWith("a");
+		})
+		.map(s->{ 
+			System.out.println(s);
+			return s.toUpperCase();
+		})
+		.forEach(s->System.out.println(s));
+		
+		System.out.println("****************************************************");
+		
+		/*Sorting is a special kind of intermediate operation. 
+		It's a so called stateful operation since in order to sort a collection of elements you have to maintain state during ordering.*/
+		
+		Stream.of("d2", "a2", "b1", "b3", "c")
+	    .sorted((s1, s2) -> {
+	        System.out.printf("sort: %s; %s\n", s1, s2);
+	        return s1.compareTo(s2);
+	    })
+	    .filter(s -> {
+	        System.out.println("filter: " + s);
+	        return s.startsWith("a");
+	    })
+	    .map(s -> {
+	        System.out.println("map: " + s);
+	        return s.toUpperCase();
+	    })
+	    .forEach(s -> System.out.println("forEach: " + s));
+		
+		System.out.println("****************************************************");
+		
+		Stream.of("d2", "a2", "b1", "b3", "c","a1")
+		.filter(s -> {
+	        System.out.println("filter: " + s);
+	        return s.startsWith("a");
+	    })
+	    .sorted((s1, s2) -> {
+	        System.out.printf("sort: %s; %s\n", s1, s2);
+	        return s1.compareTo(s2);
+	    })
+	    .map(s -> {
+	        System.out.println("map: " + s);
+	        return s.toUpperCase();
+	    })
+	    .forEach(s -> System.out.println("forEach: " + s));
+		
+		
+		//Java 8 streams cannot be reused. As soon as you call any terminal operation the stream is closed:
+		
+		Stream<String> stream =
+			    Stream.of("d2", "a2", "b1", "b3", "c")
+			        .filter(s -> s.startsWith("a"));
+
+			stream.anyMatch(s -> true);    // ok
+			stream.noneMatch(s -> true);   // exception
 	}
 }
