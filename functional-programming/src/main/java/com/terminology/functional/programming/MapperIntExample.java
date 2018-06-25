@@ -34,7 +34,7 @@ public class MapperIntExample {
 		
 		int sum = empList.stream().mapToInt(Employee::getAge).sum();
 		
-		System.out.println("------------------------------sum >>>"+sum);
+		System.out.println("------------------------------sum "+sum);
 		
 		
 	}
