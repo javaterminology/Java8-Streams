@@ -1,0 +1,12 @@
+stackoverflow error/Outofmemory error
+RestTemplateAdvice
+CheckedException/UncheckedException - custom exception is checked or unchecked exception?
+Hibernate - One to Many(1000 records) fetch="eager" is theere any performance issue?
+Functional interface will have same overloaded method as just like abstract?
+stream vs parallel stream ..should i use always parallel stream for better performance?
+HashMap insertion order if we get by keys ?
+Comparator can we apply for Maps?
+TreeMap sorting order?
+Executors if i give 1000 thread pool size for collection of 1000 objects will we get good performance? No
+Springboot advantages?
+Hibernate n+1 problem?
