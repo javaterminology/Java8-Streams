@@ -2,7 +2,7 @@ stackoverflow error/Outofmemory error
 RestTemplateAdvice
 CheckedException/UncheckedException - custom exception is checked or unchecked exception?
 Hibernate - One to Many(1000 records) fetch="eager" is theere any performance issue?
-Functional interface will have same overloaded method as just like abstract?
+In Functional interface if we have same method with overloaded signature as just like abstract? what will happen?
 stream vs parallel stream ..should i use always parallel stream for better performance?
 HashMap insertion order if we get by keys ?
 Comparator can we apply for Maps?
