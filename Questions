@@ -1,3 +1,5 @@
+http://ronnieroller.com/java/date-times
+
 stackoverflow error/Outofmemory error
 RestTemplateAdvice
 CheckedException/UncheckedException - custom exception is checked or unchecked exception?
@@ -14,3 +16,5 @@ Sonarcube?
 JaCoco maven plugin?
 JUnit integration testing?
 Mongodb when to use?
+propagation levels- REQUIRED,REQUIRES-NEW when to use them?
+Spring AOP - pointcut,advice,joinpoint
