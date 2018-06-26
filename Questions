@@ -10,3 +10,7 @@ TreeMap sorting order?
 Executors if i give 1000 thread pool size for collection of 1000 objects will we get good performance? No
 Springboot advantages?
 Hibernate n+1 problem?
+Sonarcube?
+JaCoco maven plugin?
+JUnit integration testing?
+Mongodb when to use?
