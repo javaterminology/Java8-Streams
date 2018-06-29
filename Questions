@@ -24,3 +24,9 @@ TO SEE QUERY EXECUTION STATISTICS:
 db.getCollection('collection-name').find({}).explain("executionStats");
 --create index in mongodb for columns
 db.COLLECTION-NAME.createIndex({ student: 1, type: 1 });
+--create index programatically using spring data mongodb
+
+@Document
+@CompoundIndex(def = "{'firstName':1, 'salary':1}", name = "person_index")
+public class Person {
+  @Id private String id;
