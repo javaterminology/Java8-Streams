@@ -19,3 +19,6 @@ JUnit integration testing?
 Mongodb when to use?
 propagation levels- REQUIRED,REQUIRES-NEW when to use them?
 Spring AOP - pointcut,advice,joinpoint
+MongoDB:
+TO SEE QUERY EXECUTION STATISTICS:
+db.getCollection('collection-name').find({}).explain("executionStats");
