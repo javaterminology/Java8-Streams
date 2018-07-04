@@ -30,3 +30,20 @@ db.COLLECTION-NAME.createIndex({ student: 1, type: 1 });
 @CompoundIndex(def = "{'firstName':1, 'salary':1}", name = "person_index")
 public class Person {
   @Id private String id;
+
+
+@Mock creates a mock. @InjectMocks creates an instance of the class and injects the mocks that are created with the @Mock (or @Spy) annotations into this instance. 
+Note that you must use @RunWith(MockitoJUnitRunner.class) or Mockito.initMocks(this) to initialise these mocks and inject them.
+
+@RunWith(MockitoJUnitRunner.class)
+public class SomeManagerTest {
+
+    @InjectMocks
+    private SomeManager someManager;
+
+    @Mock
+    private SomeDependency someDependency; // this will be injected into someManager
+
+     //tests...
+
+}
