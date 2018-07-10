@@ -47,3 +47,8 @@ public class SomeManagerTest {
      //tests...
 
 }
+
+ISO FORMAT:
+select TO_CHAR(SYSTIMESTAMP,'YYYY-MM-DD"T"HH24:MI:SS.FFTZR') from dual;
+DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sZ");
+String s = sdf.format(new Date());
