@@ -64,3 +64,9 @@ var record = db.mycollection.findOne();
 print(record); 
 var localNow = new Date( record.date.getTime() -  ( record.offset * 60000 ) );
 print(localNow); 
+
+//converting utc to hkt for mongo collection - mongodb by default stores date in UTC time stamp.
+
+    @JsonFormat(timezone = "UTC+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createDate;
