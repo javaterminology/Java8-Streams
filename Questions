@@ -7,7 +7,7 @@ CheckedException/UncheckedException - custom exception is checked or unchecked e
 Hibernate - One to Many(1000 records) fetch="eager" is theere any performance issue?
 In Functional interface if we have same method with overloaded signature as just like abstract? what will happen?
 stream vs parallel stream ..should i use always parallel stream for better performance?
-HashMap insertion order if we get by keys ?
+HashMap insertion order(inserted keys 1 to 100) can we get insertion order by keys ?
 Comparator can we apply for Maps?
 TreeMap sorting order?
 Executors if i give 1000 thread pool size for collection of 1000 objects will we get good performance? No
