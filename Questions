@@ -70,3 +70,10 @@ print(localNow);
     @JsonFormat(timezone = "UTC+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createDate;
+    
+//NPM INSTALL
+npm set repository http://registry.npmjs.org/
+npm set proxy http://00:00:00:00:8080/ 
+1.npm install
+2.npm run build
+3.npm start 
