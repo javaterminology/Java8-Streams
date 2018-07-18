@@ -1,0 +1,15 @@
+<html>
+<head>
+</head>
+<body>
+ <script type="text/javascript">
+	function addComma(nStr)
+	{
+	var parts = x.toString().split(".");
+	parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	return parts.join(".");
+	}
+</script>
+<input type="text" name="amount" value="10000.00" onfocus="addComma(this.value)">
+</body>
+</html>
