@@ -1,4 +1,4 @@
-package com.terminology;
+package com.terminology.functional.programming;
 
 public class KittenMittens {
 
