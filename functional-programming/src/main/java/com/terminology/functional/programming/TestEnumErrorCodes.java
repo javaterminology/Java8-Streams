@@ -11,9 +11,9 @@ public class TestEnumErrorCodes {
 		
 		if(EnumErrorCodes.getErrorDescByCode(errorCode).equals("FanError")){
 			reportFanError();
-		}else if(EnumErrorCodes.getErrorDescByCode(errorCode).equals("FanError")){
+		}else if(EnumErrorCodes.getErrorDescByCode(errorCode).equals("BeltError")){
 			reportBeltError();
-		}else if(EnumErrorCodes.getErrorDescByCode(errorCode).equals("FanError")){
+		}else if(EnumErrorCodes.getErrorDescByCode(errorCode).equals("EngineError")){
 			reportEngineError();
 		}else{
 			fixProblemNow();
