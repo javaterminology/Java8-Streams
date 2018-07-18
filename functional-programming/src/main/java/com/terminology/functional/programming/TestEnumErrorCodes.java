@@ -9,11 +9,11 @@ public class TestEnumErrorCodes {
 	}
 	public static void forError(String errorCode){
 		
-		if(ErrorCodes.getErrorDescByCode(errorCode).equals("FanError")){
+		if(EnumErrorCodes.getErrorDescByCode(errorCode).equals("FanError")){
 			reportFanError();
-		}else if(ErrorCodes.getErrorDescByCode(errorCode).equals("FanError")){
+		}else if(EnumErrorCodes.getErrorDescByCode(errorCode).equals("FanError")){
 			reportBeltError();
-		}else if(ErrorCodes.getErrorDescByCode(errorCode).equals("FanError")){
+		}else if(EnumErrorCodes.getErrorDescByCode(errorCode).equals("FanError")){
 			reportEngineError();
 		}else{
 			fixProblemNow();
