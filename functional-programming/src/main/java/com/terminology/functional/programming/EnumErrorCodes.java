@@ -2,7 +2,7 @@ package com.terminology.functional.programming;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum ErrorCodes {
+public enum EnumErrorCodes {
 	ERROR_01("01","BeltError"),
 	ERROR_02("02","BeltError"),
 	ERROR_03("03","BeltError"),
@@ -17,11 +17,11 @@ public enum ErrorCodes {
 	String errorCode;
 	String desc;
 	static {
-        for (ErrorCodes error : ErrorCodes.values()) {
+        for (EnumErrorCodes error : EnumErrorCodes.values()) {
             errorMap.put(error.getErrorCode(), error.getDesc());
         }
     }
-	private ErrorCodes(String errorCode,String desc){
+	private EnumErrorCodes(String errorCode,String desc){
 		this.errorCode = errorCode;
 		this.desc = desc;
 	}
