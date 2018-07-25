@@ -96,3 +96,9 @@ LookupOperation lookupOperation = LookupOperation.newLookup()
 	    Aggregation aggregation = Aggregation.newAggregation(Aggregation.match(Criteria.where("_id").is("1")) , lookupOperation);
 	    List<EmpDeptResult> results = mongoTemplate.aggregate(aggregation, "Employee", EmpDeptResult.class).getMappedResults();
 	    System.out.println(results);
+	    
+>>with out using component scan in springboot how do u inject dependency class into dependent class?
+	using session.factories - src/main/resources/META-INF/services/session.factories - define complete class path
+>>if suppose we have 2 data sources for u r application .. how do u ensure u r connecting to correct datasource in spring application.
+	using Qualifier annotation
+>>in hibernate how will u avoid partial commits - what is the annotation
