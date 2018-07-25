@@ -77,3 +77,22 @@ npm set proxy http://00:00:00:00:8080/
 1.npm install
 2.npm run build
 3.npm start 
+
+//mongodb lookup operation - join with other collection
+    Employee e =new Employee();
+		e.set_id("1");
+		e.setDept_id("100");
+		e.setName("Raja");
+		
+		Department d = new Department();
+		d.set_id("100");
+		d.setDept_name("XYZ");
+    
+LookupOperation lookupOperation = LookupOperation.newLookup()
+                .from("Department")
+                .localField("dept_id")
+                .foreignField("_id")
+                .as("departments");
+	    Aggregation aggregation = Aggregation.newAggregation(Aggregation.match(Criteria.where("_id").is("1")) , lookupOperation);
+	    List<EmpDeptResult> results = mongoTemplate.aggregate(aggregation, "Employee", EmpDeptResult.class).getMappedResults();
+	    System.out.println(results);
