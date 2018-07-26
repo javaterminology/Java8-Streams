@@ -1,3 +1,4 @@
+
 http://ronnieroller.com/java/date-times
 https://www.toptal.com/java/spring-boot-rest-api-error-handling
 
@@ -19,19 +20,7 @@ JUnit integration testing?
 Mongodb when to use?
 propagation levels- REQUIRED,REQUIRES-NEW when to use them?
 Spring AOP - pointcut,advice,joinpoint
-MongoDB:
-TO SEE QUERY EXECUTION STATISTICS:
-db.getCollection('collection-name').find({}).explain("executionStats");
---create index in mongodb for columns
-db.COLLECTION-NAME.createIndex({ student: 1, type: 1 });
---create index programatically using spring data mongodb
-
-@Document
-@CompoundIndex(def = "{'firstName':1, 'salary':1}", name = "person_index")
-public class Person {
-  @Id private String id;
-
-#################################### MOCKITO
+#################################### JUNIT MOCKITO
 
 @Mock creates a mock. @InjectMocks creates an instance of the class and injects the mocks that are created with the @Mock (or @Spy) annotations into this instance. 
 Note that you must use @RunWith(MockitoJUnitRunner.class) or Mockito.initMocks(this) to initialise these mocks and inject them.
@@ -49,12 +38,12 @@ public class SomeManagerTest {
 
 }
 
-ISO FORMAT:
+############################### SQL QUERY TO FORMAT DATE AS ISO FORMAT:
 select TO_CHAR(SYSTIMESTAMP,'YYYY-MM-DD"T"HH24:MI:SS.FFTZR') from dual;
 DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sZ");
 String s = sdf.format(new Date());
 
-mongodb:
+################################ MONGODB:
 var now = new Date();
 print(now.getTimezoneOffset());
 db.mycollection.save( { date: now,
@@ -66,20 +55,32 @@ print(record);
 var localNow = new Date( record.date.getTime() -  ( record.offset * 60000 ) );
 print(localNow); 
 
-//converting utc to hkt for mongo collection - mongodb by default stores date in UTC time stamp.
+TO SEE QUERY EXECUTION STATISTICS:
+db.getCollection('collection-name').find({}).explain("executionStats");
+--create index in mongodb for columns
+db.COLLECTION-NAME.createIndex({ student: 1, type: 1 });
+--create index programatically using spring data mongodb
 
-    @JsonFormat(timezone = "UTC+8", pattern = "yyyy-MM-dd HH:mm:ss")
+############################ save mongo collection date with iso format - mongodb by default stores date in UTC time stamp.
+
+   
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createDate;
     
-//NPM INSTALL
+    //CREATE INDEX FOR MONGO COLLECTION
+    @Document
+    @CompoundIndex(def = "{'firstName':1, 'salary':1}", name = "person_index")
+    public class Person {
+    @Id private String id;
+    
+########################## NPM INSTALL
 npm set repository http://registry.npmjs.org/
 npm set proxy http://00:00:00:00:8080/ 
 1.npm install
 2.npm run build
 3.npm start 
 
-//mongodb lookup operation - join with other collection
+########################## spring data mongodb lookup operation - join with other collection
     Employee e =new Employee();
 		e.set_id("1");
 		e.setDept_id("100");
@@ -104,7 +105,7 @@ LookupOperation lookupOperation = LookupOperation.newLookup()
 	using Qualifier annotation
 >>in hibernate how will u avoid partial commits - what is the annotation
 
-//Hibernate fetch strategy
+######################### Hibernate fetch strategy
 @Entity
 @Table
 public class Parent {
@@ -130,7 +131,8 @@ public class Child {
     //getter setter
 }
 In above example, when getting Parent entity, hibernate will automaticly load all child entities eagerly using join. On the other hand, when you fetch Child, Parent entity won't be selected unless you call it explicity in your code child.getParent().
-
 FetchType (Lazy/Eager) tells whether we want entity to be loaded eagerly or lazy, when there's call in code.
-
 FetchMode (Select/Join) tells whether we want our entitity to be loaded with additional select or in one query with join or subselect.
+FetchMode : It defines how hibernate (using which strategy, e.g. Join, SubQuery etc) will fetch data from database.
+FetchType : It defines whether hibernate will fetch the data or not.
+NOTE : FetchMode is only applicable when FetchType = EAGER while annotation.
