@@ -95,15 +95,22 @@ npm set proxy http://00:00:00:00:8080/
 		Department d = new Department();
 		d.set_id("100");
 		d.setDept_name("XYZ");
-    
-LookupOperation lookupOperation = LookupOperation.newLookup()
-                .from("Department")
+		
+		
+		this.mongoTemplate.insert(e, "employee");
+		this.mongoTemplate.insert(d, "department");
+		
+		LookupOperation lookupOperation = LookupOperation.newLookup()
+                .from("department")
                 .localField("dept_id")
                 .foreignField("_id")
                 .as("departments");
-	    Aggregation aggregation = Aggregation.newAggregation(Aggregation.match(Criteria.where("_id").is("1")) , lookupOperation);
-	    List<EmpDeptResult> results = mongoTemplate.aggregate(aggregation, "Employee", EmpDeptResult.class).getMappedResults();
+	    Aggregation aggregation = Aggregation.newAggregation(
+	    		match(new Criteria("_id").is("1")) , lookupOperation);
+	    List<EmpDeptResult> results = mongoTemplate.aggregate(aggregation, Employee.class, EmpDeptResult.class).getMappedResults();
 	    System.out.println(results);
+	    this.mongoTemplate.dropCollection("employee");
+	    this.mongoTemplate.dropCollection("department");
 
 ######################### Hibernate fetch strategy
 @Entity
