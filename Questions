@@ -31,6 +31,7 @@ db.COLLECTION-NAME.createIndex({ student: 1, type: 1 });
 public class Person {
   @Id private String id;
 
+#################################### MOCKITO
 
 @Mock creates a mock. @InjectMocks creates an instance of the class and injects the mocks that are created with the @Mock (or @Spy) annotations into this instance. 
 Note that you must use @RunWith(MockitoJUnitRunner.class) or Mockito.initMocks(this) to initialise these mocks and inject them.
