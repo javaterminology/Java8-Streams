@@ -2,24 +2,29 @@
 http://ronnieroller.com/java/date-times
 https://www.toptal.com/java/spring-boot-rest-api-error-handling
 
-stackoverflow error/Outofmemory error
-RestTemplateAdvice/RestControllerAdvice
-CheckedException/UncheckedException - custom exception is checked or unchecked exception?
-Hibernate - One to Many(1000 records) fetch="eager" is theere any performance issue?
-In Functional interface if we have same method with overloaded signature as just like abstract? what will happen?
-stream vs parallel stream ..should i use always parallel stream for better performance?
-HashMap insertion order(inserted keys 1 to 100) can we get insertion order by keys ?
-Comparator can we apply for Maps?
-TreeMap sorting order?
-Executors if i give 1000 thread pool size for collection of 1000 objects will we get good performance? No
-Springboot advantages?
-Hibernate n+1 problem?
-Sonarcube?
-JaCoco maven plugin?
-JUnit integration testing?
-Mongodb when to use?
-propagation levels- REQUIRED,REQUIRES-NEW when to use them?
-Spring AOP - pointcut,advice,joinpoint
+>> stackoverflow error/Outofmemory error
+>> RestTemplateAdvice/RestControllerAdvice
+>> CheckedException/UncheckedException - custom exception is checked or unchecked exception?
+>> Hibernate - One to Many(1000 records) fetch="eager" is theere any performance issue?
+>> In Functional interface if we have same method with overloaded signature as just like abstract? what will happen?
+>> stream vs parallel stream ..should i use always parallel stream for better performance?
+>> HashMap insertion order(inserted keys 1 to 100) can we get insertion order by keys ?
+>> Comparator can we apply for Maps?
+>> TreeMap sorting order?
+>> Executors if i give 1000 thread pool size for collection of 1000 objects will we get good performance? No
+>> Springboot advantages?
+>> Hibernate n+1 problem?
+>> Sonarcube?
+>> JaCoco maven plugin?
+>> JUnit integration testing?
+>> Mongodb when to use?
+>> propagation levels- REQUIRED,REQUIRES-NEW when to use them?
+>> Spring AOP - pointcut,advice,joinpoint
+>> with out using component scan in springboot how do u inject dependency class into dependent class?
+	using session.factories - src/main/resources/META-INF/services/session.factories - define complete class path
+>> if suppose we have 2 data sources for u r application .. how do u ensure u r connecting to correct datasource in spring application.
+	using Qualifier annotation
+>> in hibernate how will u avoid partial commits - what is the annotation
 #################################### JUNIT MOCKITO
 
 @Mock creates a mock. @InjectMocks creates an instance of the class and injects the mocks that are created with the @Mock (or @Spy) annotations into this instance. 
@@ -62,8 +67,6 @@ db.COLLECTION-NAME.createIndex({ student: 1, type: 1 });
 --create index programatically using spring data mongodb
 
 ############################ save mongo collection date with iso format - mongodb by default stores date in UTC time stamp.
-
-   
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createDate;
     
@@ -98,12 +101,6 @@ LookupOperation lookupOperation = LookupOperation.newLookup()
 	    Aggregation aggregation = Aggregation.newAggregation(Aggregation.match(Criteria.where("_id").is("1")) , lookupOperation);
 	    List<EmpDeptResult> results = mongoTemplate.aggregate(aggregation, "Employee", EmpDeptResult.class).getMappedResults();
 	    System.out.println(results);
-	    
->>with out using component scan in springboot how do u inject dependency class into dependent class?
-	using session.factories - src/main/resources/META-INF/services/session.factories - define complete class path
->>if suppose we have 2 data sources for u r application .. how do u ensure u r connecting to correct datasource in spring application.
-	using Qualifier annotation
->>in hibernate how will u avoid partial commits - what is the annotation
 
 ######################### Hibernate fetch strategy
 @Entity
@@ -117,7 +114,6 @@ public class Parent {
     private List<Child> child;    
     //getter setters
 }
-
 
 @Entity
 @Table
