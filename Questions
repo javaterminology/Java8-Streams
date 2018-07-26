@@ -126,9 +126,10 @@ public class Child {
 
     //getter setter
 }
-In above example, when getting Parent entity, hibernate will automaticly load all child entities eagerly using join. On the other hand, when you fetch Child, Parent entity won't be selected unless you call it explicity in your code child.getParent().
+In above example, when getting Parent entity, hibernate will automatically load all child entities eagerly using join. On the other hand, 
+when you fetch Child, Parent entity won't be selected unless you call it explicity in your code child.getParent().
 FetchType (Lazy/Eager) tells whether we want entity to be loaded eagerly or lazy, when there's call in code.
 FetchMode (Select/Join) tells whether we want our entitity to be loaded with additional select or in one query with join or subselect.
-FetchMode : It defines how hibernate (using which strategy, e.g. Join, SubQuery etc) will fetch data from database.
-FetchType : It defines whether hibernate will fetch the data or not.
+>>FetchMode : It defines how hibernate (using which strategy, e.g. Join, SubQuery etc) will fetch data from database.
+>>FetchType : It defines whether hibernate will fetch the data or not.
 NOTE : FetchMode is only applicable when FetchType = EAGER while annotation.
