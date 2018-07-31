@@ -143,3 +143,6 @@ FetchMode (Select/Join) tells whether we want our entitity to be loaded with add
 >>FetchMode : It defines how hibernate (using which strategy, e.g. Join, SubQuery etc) will fetch data from database.
 >>FetchType : It defines whether hibernate will fetch the data or not.
 NOTE : FetchMode is only applicable when FetchType = EAGER while annotation.
+
+>>https://docs.mulesoft.com/mule-user-guide/v/3.6/splitter-flow-control-reference#full-example-code-3
+>>https://docs.mulesoft.com/mule-user-guide/v/3.6/scatter-gather
