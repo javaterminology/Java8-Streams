@@ -20,6 +20,7 @@ https://www.toptal.com/java/spring-boot-rest-api-error-handling
 >> Mongodb when to use?
 >> propagation levels- REQUIRED,REQUIRES-NEW when to use them?
 >> Spring AOP - pointcut,advice,joinpoint
+
 >> with out using component scan in springboot how do u inject dependency class into dependent class?
 	using spring.factories - src/main/resources/META-INF/spring.factories
 	ex: org.springframework.boot.env.EnvironmentPostProcessor = com.example.hello.env.LocalSettingsEnvironmentPostProcessor
@@ -111,6 +112,8 @@ npm set proxy http://00:00:00:00:8080/
 	    System.out.println(results);
 	    this.mongoTemplate.dropCollection("employee");
 	    this.mongoTemplate.dropCollection("department");
+	    
+	    >> https://stackoverflow.com/questions/44471800/spring-data-match-and-filter-nested-array
 
 ######################### Hibernate fetch strategy
 @Entity
