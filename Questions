@@ -116,7 +116,7 @@ npm set proxy http://00:00:00:00:8080/
 	    >> https://stackoverflow.com/questions/44471800/spring-data-match-and-filter-nested-array
 	    >> https://stackoverflow.com/questions/43470578/spring-data-mongo-db-query-embedded-array
 	    >> https://stackoverflow.com/questions/44949720/spring-mongotemplate-mapping-aggregation-result-to-collections-e-g-list-and
-
+	    >> https://github.com/spring-projects/spring-data-mongodb/blob/master/src/main/asciidoc/reference/mongo-repositories.adoc
 ######################### Hibernate fetch strategy
 @Entity
 @Table
