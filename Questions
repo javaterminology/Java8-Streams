@@ -117,6 +117,20 @@ npm set proxy http://00:00:00:00:8080/
 	    >> https://stackoverflow.com/questions/43470578/spring-data-mongo-db-query-embedded-array
 	    >> https://stackoverflow.com/questions/44949720/spring-mongotemplate-mapping-aggregation-result-to-collections-e-g-list-and
 	    >> https://github.com/spring-projects/spring-data-mongodb/blob/master/src/main/asciidoc/reference/mongo-repositories.adoc
+		
+		List<AggregationOperation> list = new ArrayList<AggregationOperation>();
+		list.add(Aggregation.unwind("documentRequest"));
+		list.add(Aggregation.unwind("documentRequest.documentDetails"));
+		list.add(Aggregation.match(Criteria.where("documentRequest.documentDetails.docId").is("DOC1")));
+		list.add(Aggregation.match(Criteria.where("documentRequest.documentDetails.customerId").is("11111111")));
+	
+
+		TypedAggregation<DocumentRequestObj> agg = Aggregation.newAggregation(DocumentRequestObj.class, list);
+		List<Document> dbObjects = mongoTemplate.aggregate(agg, "document_grouping", Document.class).getMappedResults();     
+		System.out.println(dbObjects.get(0).toJson());
+		//mongoTemplate.getConverter().read(DocumentRequestObj.class, dbObjects.get(0));
+
+
 ######################### Hibernate fetch strategy
 @Entity
 @Table
