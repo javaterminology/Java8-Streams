@@ -123,7 +123,9 @@ npm set proxy http://00:00:00:00:8080/
 		list.add(Aggregation.unwind("documentRequest.documentDetails"));
 		list.add(Aggregation.match(Criteria.where("documentRequest.documentDetails.docId").is("DOC1")));
 		list.add(Aggregation.match(Criteria.where("documentRequest.documentDetails.customerId").is("11111111")));
-	
+		list.add(Aggregation.project().andExclude("_id"));
+					ObjectMapper mapper = new ObjectMapper();
+					mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
 
 		TypedAggregation<DocumentRequestObj> agg = Aggregation.newAggregation(DocumentRequestObj.class, list);
 		List<Document> dbObjects = mongoTemplate.aggregate(agg, "document_grouping", Document.class).getMappedResults();     
