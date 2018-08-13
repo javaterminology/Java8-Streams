@@ -167,3 +167,8 @@ NOTE : FetchMode is only applicable when FetchType = EAGER while annotation.
 
 >>https://docs.mulesoft.com/mule-user-guide/v/3.6/splitter-flow-control-reference#full-example-code-3
 >>https://docs.mulesoft.com/mule-user-guide/v/3.6/scatter-gather
+-------------Oracle 12c---------------------
+alter session set container=orclpdb;
+create user raja identified by raja;
+grant create session to raja;
+connect raja/raja@orclpdb;--pluggable database.	
