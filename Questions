@@ -194,3 +194,23 @@ public class User implements Serializable {
     private String firstName;
     private String lastName;
     private int age;
+  
+ ///////////////////////////// Elastic ////////////////////////////////////
+    PUT localhost:9200/books?&pretty - CREATE INDEX books
+curl -XPUT 'localhost:9200/books?&pretty'
+
+GET localhost:9200/books/_mapping?&pretty - mappings for index
+CURL -XGET 'localhost:9200/books/_mapping?&pretty'
+ 
+curl -XPOST 'localhost:9200/books/fiction/1?&pretty' -d @books.json -H 'Content-Type: application/json'
+localhost:9200/books/fiction/1?&pretty
+
+books.json:
+{
+"name":"Java",
+"author":"Rajasekhar",
+"cost":"200.50",
+"Available":"true",
+"publishers":"Graham Hills",
+"date":"2018-05-07"
+}
