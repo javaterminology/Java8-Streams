@@ -185,3 +185,12 @@ curl -H 'Content-Type: application/json' -X GET https://localhost:9200/index_nam
     <version>1.18.0</version>
     <scope>provided</scope>
 </dependency>
+@Entity
+@Getter @Setter @NoArgsConstructor // <--- THIS is it
+public class User implements Serializable {
+ 
+    private @Id Long id; // will be set when persisting
+ 
+    private String firstName;
+    private String lastName;
+    private int age;
