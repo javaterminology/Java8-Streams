@@ -176,3 +176,5 @@ connect raja/raja@orclpdb;--pluggable database.
 //ELASTIC SEARCH
 to see content of elastic index:
 curl -H 'Content-Type: application/json' -X GET https://localhost:9200/index_name/_search?pretty
+>> PRIME NG module for graphs,charts,grids - Angular 
+>> Lombak - maven plugin - annotate @lombak for your pojo then it will create setter and getters internally.
