@@ -172,3 +172,7 @@ alter session set container=orclpdb;
 create user raja identified by raja;
 grant create session to raja;
 connect raja/raja@orclpdb;--pluggable database.	
+
+//ELASTIC SEARCH
+to see content of elastic index:
+curl -H 'Content-Type: application/json' -X GET https://localhost:9200/index_name/_search?pretty
