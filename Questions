@@ -217,3 +217,142 @@ books.json:
 "publishers":"Graham Hills",
 "date":"2018-05-07"
 }
+
+Example for create daily elastic search index::::
+
+import com.google.common.io.ByteStreams;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.scb.batch.entity.Invoice;
+import io.searchbox.client.JestClient;
+import io.searchbox.client.JestClientFactory;
+import io.searchbox.client.JestResult;
+import io.searchbox.client.config.HttpClientConfig;
+import io.searchbox.core.*;
+import io.searchbox.indices.CreateIndex;
+import io.searchbox.indices.IndicesExists;
+import io.searchbox.indices.aliases.AddAliasMapping;
+import io.searchbox.indices.aliases.ModifyAliases;
+import io.searchbox.indices.mapping.PutMapping;
+import net.logstash.logback.encoder.org.apache.commons.lang.StringUtils;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.junit.Test;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.TimeUnit;
+
+public class DailyElasticSearch {
+    private static final String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+    private static final Gson gson = new GsonBuilder().setDateFormat(DATE_FORMAT).create();
+
+    @Test
+    public void createDailyIndex() throws IOException {
+
+        HttpClientConfig.Builder httpClientConfigBuilder = new HttpClientConfig
+                .Builder("http://10..1.1.1:8080/")
+                .connTimeout(90000)
+                .readTimeout(90000)
+                .maxConnectionIdleTime(1, TimeUnit.MINUTES)
+                .requestCompressionEnabled(true)
+                .maxTotalConnection(8)
+                .gson(gson)
+                .multiThreaded(true);
+//        if(elasticConfiguration.getUsername() != null){
+//            httpClientConfigBuilder.defaultCredentials(elasticConfiguration.getUsername(), elasticConfiguration.getPassword());
+//        }
+        JestClientFactory factory = new JestClientFactory();
+        factory.setHttpClientConfig(httpClientConfigBuilder.build());
+        JestClient client = factory.getObject();
+
+        String businessDateMonthYear = "2018-05-03";
+        Calendar.getInstance().getTime();
+
+        ////////////////
+        //CREATE INDEX//
+        ////////////////
+        String indexName = StringUtils.lowerCase("raja_index_testing"
+                + "_" + businessDateMonthYear);
+
+        String mappingJson = new String(ByteStreams.toByteArray(this.getClass().getClassLoader().getResourceAsStream("raja_index_testing_mapping.json")));
+
+        //check if index exists
+        boolean indexExists = client.execute(new IndicesExists.Builder(indexName).build()).isSucceeded();
+
+        //create index
+        if (!indexExists) {
+            client.execute(new CreateIndex.Builder(indexName).build());
+            client.execute(new PutMapping.Builder(indexName, "invoice", mappingJson).build());
+        }
+
+        List<Index> indices = new ArrayList<>();
+
+        Product product1 = new Product();
+        product1.setName("product 1");
+        product1.setId(Integer.toString(ThreadLocalRandom.current().nextInt(10000, 90000)));
+
+        String id = product1.getId();
+        System.out.println("product 1 : " + id);
+
+        Product product2 = new Product();
+        product2.setName("product 2");
+        product2.setId(Integer.toString(ThreadLocalRandom.current().nextInt(10000, 90000)));
+        System.out.println("product 2 : " + product2.getId());
+
+        indices.add(new Index.Builder(product2).build());
+        indices.add(new Index.Builder(product1).build());
+
+        ////////////////////////////////////
+        //WRITE DOCUMENTS                 //
+        //NOTE, WE'RE WRITING ON THE INDEX//
+        //AND NOT ON THE ALIAS            //
+        ////////////////////////////////////
+        Bulk bulk = new Bulk.Builder()
+                .defaultIndex(StringUtils.lowerCase("raja_index_testing"
+                        + "_" + businessDateMonthYear))
+                .defaultType("product")
+                .addAction(indices)
+                .build();
+
+        BulkResult result = client.execute(bulk);
+
+        System.out.println("Data inserted : " + result.isSucceeded());
+
+        ////////////////
+        //ADD ALIAS   //
+        ////////////////
+        if(!indexExists) {
+            ModifyAliases modifyAliases = new ModifyAliases.Builder(
+                    new AddAliasMapping
+                            .Builder(
+                            "raja_index_testing_" + businessDateMonthYear,
+                            "raja_index_testing"
+                    )
+                            .build())
+                    .build();
+
+            JestResult assignAliasResult = client.execute(modifyAliases);
+            System.out.println("Alias assigned : " + assignAliasResult.isSucceeded());
+        }
+
+        /////////////////////////////////////
+        //SEARCH DOCUMENTS                 //
+        //NOTE, WE'RE READING ON THE ALIAS //
+        //AND NOT ON THE INDEX NAME        //
+        /////////////////////////////////////
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder().query(QueryBuilders.fuzzyQuery("ID", ID1));
+        Search search = (Search) new Search.Builder(searchSourceBuilder.toString())
+                // multiple index or types can be added.
+                .addIndex("raja_index_testing")
+                .addType("product")
+                .build();
+
+        JestResult searchResult = client.execute(search);
+        System.out.println("Which Index " + Id1 + " in : " + ((SearchResult) searchResult).getHits(Product.class).get(0).index);
+    }
+}
+
