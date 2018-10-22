@@ -378,4 +378,42 @@ public class DailyElasticSearch {
 	**/
     }
 }
-
+//src/main/resources folder - raja_mapping.json
+{
+  "properties": {
+    "@timestamp": {
+      "type": "date"
+    },
+    "@version": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "null_value": "NULL",
+          "ignore_above": 256
+        }
+      }
+    },
+    "name": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "null_value": "NULL",
+          "ignore_above": 256
+        }
+      }
+    },
+    "amount": {
+      "type": "scaled_float",
+      "scaling_factor": 100
+    },
+    "amt_ccy": {
+      "type": "scaled_float",
+      "scaling_factor": 100
+    },
+    "bizdate": {
+      "type": "date"
+    }
+  }
+}
