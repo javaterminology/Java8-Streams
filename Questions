@@ -353,6 +353,29 @@ public class DailyElasticSearch {
 
         JestResult searchResult = client.execute(search);
         System.out.println("Which Index " + Id1 + " in : " + ((SearchResult) searchResult).getHits(Product.class).get(0).index);
+	
+	/*
+	private static void elasticSearch(JestClient client, String indexName, String type, String query) {
+	SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+	QueryStringQueryBuilder queryStringQueryBuilder = QueryBuilders.queryStringQuery(query);
+	searchSourceBuilder.query(queryStringQueryBuilder);
+	Search searchElastic = (Search) new Search.Builder(searchSourceBuilder.toString())
+			// multiple index or types can be added.
+			.addIndex(indexName).addType(type).build();
+
+	try {
+		SearchResult elasticRs = client.execute(searchElastic);
+
+		List<Hit<Article, Void>> hits = elasticRs.getHits(Product.class);
+		for (Hit<Article, Void> hit : hits) {
+			Product product = hit.source;
+			System.out.println("Elastic hits: " + product.toString());
+		}
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+	}
+	**/
     }
 }
 
