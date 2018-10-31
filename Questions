@@ -5,6 +5,7 @@ https://www.baeldung.com/akka-actors-java
 https://dzone.com/articles/mule-private-flow-versus-vm-transport
 https://dzone.com/articles/using-encrypted-passwords-mule - mule password encryption/decryption
 https://www.redpill-linpro.com/techblog/2017/01/31/encryption_in_mule.html
+https://docs.mulesoft.com/mule-runtime/4.1/secure-configuration-properties - secure proprties encrypt and decrypt
 https://qbox.io/tutorials ---------------------------------------------------elastic search
 
 >> stackoverflow error/Outofmemory error
