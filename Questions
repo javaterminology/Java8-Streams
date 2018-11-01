@@ -6,6 +6,25 @@ https://dzone.com/articles/mule-private-flow-versus-vm-transport
 https://dzone.com/articles/using-encrypted-passwords-mule - mule password encryption/decryption
 https://www.redpill-linpro.com/techblog/2017/01/31/encryption_in_mule.html
 https://docs.mulesoft.com/mule-runtime/4.1/secure-configuration-properties - secure proprties encrypt and decrypt
+--using spring boot
+@EnableEncryptableProperties - enable it for boot main class
+add this dependency - <dependency>
+	       <groupId>com.github.ulisesbocchio</groupId>
+	       <artifactId>jasypt-spring-boot-starter</artifactId>
+	       <version>2.0.0</version>
+	    </dependency>
+	    
+	 add encrypted password in yml file ..then boot automatically will converted that as decrypted password if u r using it for
+	 connectiong jms connector.
+	 jms.password = ENC(sfsdfSdasdad#asda) - encrypted password
+	 <jms:connector name="jmsConnector" doc:name="JMS Webmethods Config"
+		connectionFactoryJndiName="${jms.connection.factory}" 
+		username="${jndi.username}" password="${jms.jndi.password}" 
+		jndiDestinations="true" jndiInitialFactory="${jms.context.factory}"
+		jndiProviderUrl="${jms.jndi.url}" validateConnections="true"
+		specification="1.1" />
+	    
+	    
 https://qbox.io/tutorials ---------------------------------------------------elastic search
 
 >> stackoverflow error/Outofmemory error
