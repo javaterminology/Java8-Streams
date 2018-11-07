@@ -159,6 +159,11 @@ npm set proxy http://00:00:00:00:8080/
 		System.out.println(dbObjects.get(0).toJson());
 		//mongoTemplate.getConverter().read(DocumentRequestObj.class, dbObjects.get(0));
 
+//Pagination Mongodb Query Criteria
+	Criteria criteriaType = new Criteria();
+		Query query = new Query(criteriaType);
+		PageRequest pageableRequest = new PageRequest(pagenumber - 0, pagesize -10, new Sort(new Sort.Order(Sort.Direction.DESC, "iso_timestamp")));
+		query.with(pageableRequest); 
 
 ######################### Hibernate fetch strategy
 @Entity
