@@ -7,7 +7,7 @@ https://dzone.com/articles/using-encrypted-passwords-mule - mule password encryp
 https://www.redpill-linpro.com/techblog/2017/01/31/encryption_in_mule.html
 https://docs.mulesoft.com/mule-runtime/4.1/secure-configuration-properties - secure proprties encrypt and decrypt
 https://support.mulesoft.com/s/article/Threading-Profile-Samples - mule threading profiles
-How to preserve insertion order in HashMap?
+
 --using spring boot
 @EnableEncryptableProperties - enable it for boot main class
 add this dependency - <dependency>
@@ -53,6 +53,11 @@ https://qbox.io/tutorials ---------------------------------------------------ela
 >> servlet is threadsafe?
 >> what is the benefit of making immutable?
 >> how to make immutable an object as immutable?
+>> How to preserve insertion order in HashMap?
+>> what is deadlock and how and when it will happen?
+>> Hibernate lazyness issues
+>> Transaction Management in spring
+>> hibernate vs jpa..which one is better?
 
 >> with out using component scan in springboot how do u inject dependency class into dependent class?
 	using spring.factories - src/main/resources/META-INF/spring.factories
