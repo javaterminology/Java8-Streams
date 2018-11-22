@@ -48,6 +48,11 @@ https://qbox.io/tutorials ---------------------------------------------------ela
 >> How to preserve insertion order in HashMap?
 >> propagation levels- REQUIRED,REQUIRES-NEW when to use them?
 >> Spring AOP - pointcut,advice,joinpoint
+>> what is the difference between servlet and spring mvc servlet.
+>> http request and ajax request
+>> servlet is threadsafe?
+>> what is the benefit of making immutable?
+>> how to make immutable an object as immutable?
 
 >> with out using component scan in springboot how do u inject dependency class into dependent class?
 	using spring.factories - src/main/resources/META-INF/spring.factories
