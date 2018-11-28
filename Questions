@@ -419,6 +419,39 @@ public class DailyElasticSearch {
 	**/
     }
 }
+//bool query to fetch exact data based on given criteria
+POST products_catalog/products/_search
+{
+    "query": {
+      "bool": {
+        "must": [
+        {
+          "terms": {
+            "countryCode.keyword": [
+              "SG"
+            ]
+          }
+        },
+        {
+          "terms": {
+            "customerId.keyword": [
+             "2342342"
+            ]
+          }
+        },  
+        {
+          "terms": {
+            "dealRefNo.keyword": [
+              "W00001"
+            ]
+          }
+        }
+      ]
+      }
+    }
+  }
+  //end
+
 //src/main/resources folder - raja_mapping.json
 {
   "properties": {
