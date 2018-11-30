@@ -7,6 +7,7 @@ https://dzone.com/articles/using-encrypted-passwords-mule - mule password encryp
 https://www.redpill-linpro.com/techblog/2017/01/31/encryption_in_mule.html
 https://docs.mulesoft.com/mule-runtime/4.1/secure-configuration-properties - secure proprties encrypt and decrypt
 https://support.mulesoft.com/s/article/Threading-Profile-Samples - mule threading profiles
+https://www.blazemeter.com/blog/apache-kafka-how-to-load-test-with-jmeter
 
 --using spring boot
 @EnableEncryptableProperties - enable it for boot main class
