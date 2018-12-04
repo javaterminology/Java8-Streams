@@ -261,7 +261,9 @@ books.json:
 "date":"2018-05-07"
 }
 
-Example for create daily elastic search index::::
+####################### Example for create daily elastic search index ###################
+
+https://www.elastic.co/guide/en/x-pack/current/securing-aliases.html
 
 import com.google.common.io.ByteStreams;
 import com.google.gson.Gson;
