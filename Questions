@@ -10,6 +10,69 @@ https://support.mulesoft.com/s/article/Threading-Profile-Samples - mule threadin
 https://www.blazemeter.com/blog/apache-kafka-how-to-load-test-with-jmeter
 https://www.elastic.co/guide/en/x-pack/current/securing-aliases.html
 
+################### Kafka consumer load testing for 500 requests ###################
+package com.raja;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
+
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.Producer;
+import org.apache.kafka.clients.producer.ProducerRecord;
+
+
+public class KafkaProducerTest {
+
+    public static void main(String args[]) throws IOException, InterruptedException{
+    	
+    	FileReader fr = new FileReader(new File("C:\\Users\\Downloads\\mv-kafka-client-samples-master\\src\\main\\java\\test.txt"));
+    	StringBuffer message = new StringBuffer();
+    	
+    	BufferedReader br = null;
+
+		br = new BufferedReader(fr);
+
+		String sCurrentLine;
+
+        Properties props = new Properties();
+        props.put("bootstrap.servers", "0.20.1.1:8080"); 
+        props.put("acks", "all");
+        props.put("retries", 0);
+        props.put("batch.size", 16384);
+        props.put("linger.ms", 1);
+        props.put("buffer.memory", 33554432);
+        props.put("max.request.size", 6291456);
+        
+        props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+        props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+
+        Producer<String, String> producer = new KafkaProducer<>(props);
+
+        while ((sCurrentLine = br.readLine()) != null) {
+			message.append(sCurrentLine.replace("\n", ""));
+        }
+			
+		//Manipulate this string and replace the deal id from sequence generator	
+        System.out.println("message -> " + message);
+        
+        for(int i=1;i<500;i++){
+        	String topicMsg = "";
+        	
+        	topicMsg = message.toString().replace("551-00001","551-0000"+(i+1));
+        	
+        	Integer partition = (int)(Math.random()*5);
+        	System.out.println("topicMsg:"+topicMsg);
+        	producer.send(new ProducerRecord<String, String>("kaf_sit_test",partition,  String.valueOf(partition), topicMsg));
+        }
+       // Integer partition = (int)(Math.random()*5);
+    	//producer.send(new ProducerRecord<String, String>("kaf_sit_test",partition,  String.valueOf(partition), topicMsg));
+
+        producer.close();
+      }
+}
+
 --using spring boot
 @EnableEncryptableProperties - enable it for boot main class
 add this dependency - <dependency>
