@@ -11,6 +11,20 @@ https://www.blazemeter.com/blog/apache-kafka-how-to-load-test-with-jmeter
 https://www.elastic.co/guide/en/x-pack/current/securing-aliases.html
 https://www.jahia.com/fr/a-propos/news-evenements/blog/fivetrickstoanalyzejavathreaddumps
 https://dzone.com/articles/how-analyze-java-thread-dumps
+#############################################################################################################
+http://www.javarticles.com/2017/03/mule-message-exchange-pattern-example.html - mule message exchage pattern
+ 
+ <flow name="post:/testflow:test-config" processingStrategy="synchronous">
+	<vm:inbound-endpoint connector-ref="test-vm-connector" path="test.vm.connector.path" exchange-pattern="one-way" />
+	<!--some processing http request logic -->
+</flow>
+ <vm:connector name="test-vm-connector" createMultipleTransactedReceivers="true">
+     <vm:queue-profile maxOutstandingMessages="10000">
+        <default-in-memory-queue-store/> 
+     </vm:queue-profile>
+    </vm:connector>
+#############################################################################################################	
+	
 
 ################### Kafka consumer load testing for 500 requests ###################
 package com.raja;
