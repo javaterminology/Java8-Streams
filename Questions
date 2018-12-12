@@ -9,6 +9,7 @@ https://docs.mulesoft.com/mule-runtime/4.1/secure-configuration-properties - sec
 https://support.mulesoft.com/s/article/Threading-Profile-Samples - mule threading profiles
 https://www.blazemeter.com/blog/apache-kafka-how-to-load-test-with-jmeter
 https://www.elastic.co/guide/en/x-pack/current/securing-aliases.html
+https://www.jahia.com/fr/a-propos/news-evenements/blog/fivetrickstoanalyzejavathreaddumps
 
 ################### Kafka consumer load testing for 500 requests ###################
 package com.raja;
