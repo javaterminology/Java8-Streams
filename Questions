@@ -579,3 +579,31 @@ POST products_catalog/products/_search
     }
   }
 }
+##################ANGULAR#############
+Life cycle hooks
+Routing
+Lazy loading
+Dependency injection
+Difference between Angularjs(1) vs Angular (2)
+Obsevables vs Promise
+Service
+Component to Component communication
+Component vs Directive
+Whats is Ngmodule
+Imports vs Declarations in module file
+@viewchild & @contentchild
+Routeroutlet
+Rxjs concepts
+How do you call a rest service
+Input vs Output
+Form validations
+Reactive form
+Behavioural Subject
+Pipes
+Httpclient
+Parent child components unayi ela data pass chesthav
+Authguards concept chusuko
+Routing chesetappudu data ela pass chesthav
+Routing ni condition based ela restrict chesthav
+Security implementation while calling rest service - JWT token implementation
+map vs subscribe
