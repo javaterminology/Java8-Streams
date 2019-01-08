@@ -19,6 +19,8 @@ http://www.mastertheboss.com/jboss-frameworks/resteasy/using-rest-services-to-ma
 #############################################################################################################
 http://www.javarticles.com/2017/03/mule-message-exchange-pattern-example.html - mule message exchage pattern
  
+ <apikit:config name="test-config" raml="test/test.raml" consoleEnabled="${console.enabled}" consolePath="console" doc:name="Router" />
+
  <flow name="post:/testflow:test-config" processingStrategy="synchronous">
 	<vm:inbound-endpoint connector-ref="test-vm-connector" path="test.vm.connector.path" exchange-pattern="one-way" />
 	<!--some processing http request logic -->
