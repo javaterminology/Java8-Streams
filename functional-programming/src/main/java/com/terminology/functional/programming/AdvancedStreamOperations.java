@@ -1,7 +1,9 @@
 package com.terminology.functional.programming;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -24,7 +26,7 @@ public class AdvancedStreamOperations {
 			    Arrays.asList(
 			        new Person("Max", 18),
 			        new Person("Peter", 23),
-			        new Person("Raja", 23),
+			        new Person("Raja", 25),
 			        new Person("David", 12));
 	
 		
@@ -33,16 +35,28 @@ public class AdvancedStreamOperations {
 		.map(t-> t.getName())
 		.findAny();
 		//.forEach(person-> System.out.println(person.getName()));
-			  
-		s.ifPresent(new Consumer<String>() {
-			@Override
-			public void accept(String str) {
-				System.out.println(str);
-				
-			}
-		});
-	
-	
+	/*	s.ifPresent(str-> 
+		System.out.println(str));	  */
+		s.ifPresent(System.out::println);
+		
+		
+		/*Map<Object, List<?>> personsByAge = persons
+			    .stream()
+			    .collect(Collectors.groupingBy(new Function<Person, Map<Object, List<?>>) {
+
+					@Override
+					public Map<Object,List<?>> apply(Person per) {
+						return new HashMap(per.getAge(),Arrays.asList(per));
+					}
+				}));
+
+			personsByAge
+			    .forEach((age, p) -> System.out.format("age %s: %s\n", age, p));*/
+	   //reduce
+		persons
+	    .stream()
+	    .reduce((p1, p2) -> p1.getAge() > p2.getAge() ? p1 : p2)
+	    .ifPresent(System.out::println);    // Pamela
 	
 	}
 
