@@ -1,6 +1,121 @@
 
 http://ronnieroller.com/java/date-times
 https://www.toptal.com/java/spring-boot-rest-api-error-handling
+https://www.baeldung.com/akka-actors-java
+https://dzone.com/articles/mule-private-flow-versus-vm-transport
+https://dzone.com/articles/using-encrypted-passwords-mule - mule password encryption/decryption
+https://www.redpill-linpro.com/techblog/2017/01/31/encryption_in_mule.html
+https://docs.mulesoft.com/mule-runtime/4.1/secure-configuration-properties - secure proprties encrypt and decrypt
+https://support.mulesoft.com/s/article/Threading-Profile-Samples - mule threading profiles
+https://www.blazemeter.com/blog/apache-kafka-how-to-load-test-with-jmeter
+https://www.elastic.co/guide/en/x-pack/current/securing-aliases.html
+https://www.jahia.com/fr/a-propos/news-evenements/blog/fivetrickstoanalyzejavathreaddumps
+https://dzone.com/articles/how-analyze-java-thread-dumps
+--------RAML TO SWAGGER---------
+oas-raml-converter --from RAML --to OAS20 C:\Rajasekhar\PROJECTS\callback-test\filedownload.raml > C:\Rajasekhar\advicedownload-swagger.json
+--------RAML TO SWAGGER---------
+
+http://www.mastertheboss.com/jboss-frameworks/resteasy/using-rest-services-to-manage-download-and-upload-of-files - DOWNLOAD/UPLOAD REST API
+#############################################################################################################
+http://www.javarticles.com/2017/03/mule-message-exchange-pattern-example.html - mule message exchage pattern
+ 
+ <apikit:config name="test-config" raml="test/test.raml" consoleEnabled="${console.enabled}" consolePath="console" doc:name="Router" />
+
+ <flow name="post:/testflow:test-config" processingStrategy="synchronous">
+	<vm:inbound-endpoint connector-ref="test-vm-connector" path="test.vm.connector.path" exchange-pattern="one-way" />
+	<!--some processing http request logic -->
+</flow>
+ <vm:connector name="test-vm-connector" createMultipleTransactedReceivers="true">
+     <vm:queue-profile maxOutstandingMessages="10000">
+        <default-in-memory-queue-store/> 
+     </vm:queue-profile>
+    </vm:connector>
+#############################################################################################################	
+	
+
+################### Kafka consumer load testing for 500 requests ###################
+package com.raja;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
+
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.Producer;
+import org.apache.kafka.clients.producer.ProducerRecord;
+
+
+public class KafkaProducerTest {
+
+    public static void main(String args[]) throws IOException, InterruptedException{
+    	
+    	FileReader fr = new FileReader(new File("C:\\Users\\Downloads\\mv-kafka-client-samples-master\\src\\main\\java\\test.txt"));
+    	StringBuffer message = new StringBuffer();
+    	
+    	BufferedReader br = null;
+
+		br = new BufferedReader(fr);
+
+		String sCurrentLine;
+
+        Properties props = new Properties();
+        props.put("bootstrap.servers", "0.20.1.1:8080"); 
+        props.put("acks", "all");
+        props.put("retries", 0);
+        props.put("batch.size", 16384);
+        props.put("linger.ms", 1);
+        props.put("buffer.memory", 33554432);
+        props.put("max.request.size", 6291456);
+        
+        props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+        props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+
+        Producer<String, String> producer = new KafkaProducer<>(props);
+
+        while ((sCurrentLine = br.readLine()) != null) {
+			message.append(sCurrentLine.replace("\n", ""));
+        }
+			
+		//Manipulate this string and replace the deal id from sequence generator	
+        System.out.println("message -> " + message);
+        
+        for(int i=1;i<500;i++){
+        	String topicMsg = "";
+        	
+        	topicMsg = message.toString().replace("551-00001","551-0000"+(i+1));
+        	
+        	Integer partition = (int)(Math.random()*5);
+        	System.out.println("topicMsg:"+topicMsg);
+        	producer.send(new ProducerRecord<String, String>("kaf_sit_test",partition,  String.valueOf(partition), topicMsg));
+        }
+       // Integer partition = (int)(Math.random()*5);
+    	//producer.send(new ProducerRecord<String, String>("kaf_sit_test",partition,  String.valueOf(partition), topicMsg));
+
+        producer.close();
+      }
+}
+
+--using spring boot
+@EnableEncryptableProperties - enable it for boot main class
+add this dependency - <dependency>
+	       <groupId>com.github.ulisesbocchio</groupId>
+	       <artifactId>jasypt-spring-boot-starter</artifactId>
+	       <version>2.0.0</version>
+	    </dependency>
+	    
+	 add encrypted password in yml file ..then boot automatically will converted that as decrypted password if u r using it for
+	 connectiong jms connector.
+	 jms.password = ENC(sfsdfSdasdad#asda) - encrypted password
+	 <jms:connector name="jmsConnector" doc:name="JMS Webmethods Config"
+		connectionFactoryJndiName="${jms.connection.factory}" 
+		username="${jndi.username}" password="${jms.jndi.password}" 
+		jndiDestinations="true" jndiInitialFactory="${jms.context.factory}"
+		jndiProviderUrl="${jms.jndi.url}" validateConnections="true"
+		specification="1.1" />
+	    
+	    
+https://qbox.io/tutorials ---------------------------------------------------elastic search
 
 >> stackoverflow error/Outofmemory error
 >> RestTemplateAdvice/RestControllerAdvice
@@ -18,8 +133,19 @@ https://www.toptal.com/java/spring-boot-rest-api-error-handling
 >> JaCoco maven plugin?
 >> JUnit integration testing?
 >> Mongodb when to use?
+>> How to preserve insertion order in HashMap?
 >> propagation levels- REQUIRED,REQUIRES-NEW when to use them?
 >> Spring AOP - pointcut,advice,joinpoint
+>> what is the difference between servlet and spring mvc servlet.
+>> http request and ajax request
+>> servlet is threadsafe?
+>> what is the benefit of making immutable?
+>> how to make immutable an object as immutable?
+>> How to preserve insertion order in HashMap?
+>> what is deadlock and how and when it will happen?
+>> Hibernate lazyness issues
+>> Transaction Management in spring
+>> hibernate vs jpa..which one is better?
 
 >> with out using component scan in springboot how do u inject dependency class into dependent class?
 	using spring.factories - src/main/resources/META-INF/spring.factories
@@ -51,6 +177,7 @@ public class SomeManagerTest {
 select TO_CHAR(SYSTIMESTAMP,'YYYY-MM-DD"T"HH24:MI:SS.FFTZR') from dual;
 DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sZ");
 String s = sdf.format(new Date());
+String date = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0).format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
 
 ################################ MONGODB:
 var now = new Date();
@@ -132,6 +259,11 @@ npm set proxy http://00:00:00:00:8080/
 		System.out.println(dbObjects.get(0).toJson());
 		//mongoTemplate.getConverter().read(DocumentRequestObj.class, dbObjects.get(0));
 
+//Pagination Mongodb Query Criteria
+	Criteria criteriaType = new Criteria();
+		Query query = new Query(criteriaType);
+		PageRequest pageableRequest = new PageRequest(pagenumber - 0, pagesize -10, new Sort(new Sort.Order(Sort.Direction.DESC, "iso_timestamp")));
+		query.with(pageableRequest); 
 
 ######################### Hibernate fetch strategy
 @Entity
@@ -194,3 +326,286 @@ public class User implements Serializable {
     private String firstName;
     private String lastName;
     private int age;
+  
+ ///////////////////////////// Elastic ////////////////////////////////////
+    PUT localhost:9200/books?&pretty - CREATE INDEX books
+curl -XPUT 'localhost:9200/books?&pretty'
+
+GET localhost:9200/books/_mapping?&pretty - mappings for index
+CURL -XGET 'localhost:9200/books/_mapping?&pretty'
+ 
+curl -XPOST 'localhost:9200/books/fiction/1?&pretty' -d @books.json -H 'Content-Type: application/json'
+localhost:9200/books/fiction/1?&pretty
+
+books.json:
+{
+"name":"Java",
+"author":"Rajasekhar",
+"cost":"200.50",
+"Available":"true",
+"publishers":"Graham Hills",
+"date":"2018-05-07"
+}
+
+####################### Example for create daily elastic search index ###################
+
+https://www.elastic.co/guide/en/x-pack/current/securing-aliases.html
+
+import com.google.common.io.ByteStreams;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.scb.batch.entity.Invoice;
+import io.searchbox.client.JestClient;
+import io.searchbox.client.JestClientFactory;
+import io.searchbox.client.JestResult;
+import io.searchbox.client.config.HttpClientConfig;
+import io.searchbox.core.*;
+import io.searchbox.indices.CreateIndex;
+import io.searchbox.indices.IndicesExists;
+import io.searchbox.indices.aliases.AddAliasMapping;
+import io.searchbox.indices.aliases.ModifyAliases;
+import io.searchbox.indices.mapping.PutMapping;
+import net.logstash.logback.encoder.org.apache.commons.lang.StringUtils;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.junit.Test;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.TimeUnit;
+
+public class DailyElasticSearch {
+    private static final String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+    private static final Gson gson = new GsonBuilder().setDateFormat(DATE_FORMAT).create();
+
+    @Test
+    public void createDailyIndex() throws IOException {
+
+        HttpClientConfig.Builder httpClientConfigBuilder = new HttpClientConfig
+                .Builder("http://10..1.1.1:8080/")
+                .connTimeout(90000)
+                .readTimeout(90000)
+                .maxConnectionIdleTime(1, TimeUnit.MINUTES)
+                .requestCompressionEnabled(true)
+                .maxTotalConnection(8)
+                .gson(gson)
+                .multiThreaded(true);
+//        if(elasticConfiguration.getUsername() != null){
+//            httpClientConfigBuilder.defaultCredentials(elasticConfiguration.getUsername(), elasticConfiguration.getPassword());
+//        }
+        JestClientFactory factory = new JestClientFactory();
+        factory.setHttpClientConfig(httpClientConfigBuilder.build());
+        JestClient client = factory.getObject();
+
+        String businessDateMonthYear = "2018-05-03";
+        Calendar.getInstance().getTime();
+
+        ////////////////
+        //CREATE INDEX//
+        ////////////////
+        String indexName = StringUtils.lowerCase("raja_index_testing"
+                + "_" + businessDateMonthYear);
+
+        String mappingJson = new String(ByteStreams.toByteArray(this.getClass().getClassLoader().getResourceAsStream("raja_index_testing_mapping.json")));
+
+        //check if index exists
+        boolean indexExists = client.execute(new IndicesExists.Builder(indexName).build()).isSucceeded();
+
+        //create index
+        if (!indexExists) {
+            client.execute(new CreateIndex.Builder(indexName).build());
+            client.execute(new PutMapping.Builder(indexName, "invoice", mappingJson).build());
+        }
+
+        List<Index> indices = new ArrayList<>();
+
+        Product product1 = new Product();
+        product1.setName("product 1");
+        product1.setId(Integer.toString(ThreadLocalRandom.current().nextInt(10000, 90000)));
+
+        String id = product1.getId();
+        System.out.println("product 1 : " + id);
+
+        Product product2 = new Product();
+        product2.setName("product 2");
+        product2.setId(Integer.toString(ThreadLocalRandom.current().nextInt(10000, 90000)));
+        System.out.println("product 2 : " + product2.getId());
+
+        indices.add(new Index.Builder(product2).build());
+        indices.add(new Index.Builder(product1).build());
+
+        ////////////////////////////////////
+        //WRITE DOCUMENTS                 //
+        //NOTE, WE'RE WRITING ON THE INDEX//
+        //AND NOT ON THE ALIAS            //
+        ////////////////////////////////////
+        Bulk bulk = new Bulk.Builder()
+                .defaultIndex(StringUtils.lowerCase("raja_index_testing"
+                        + "_" + businessDateMonthYear))
+                .defaultType("product")
+                .addAction(indices)
+                .build();
+
+        BulkResult result = client.execute(bulk);
+
+        System.out.println("Data inserted : " + result.isSucceeded());
+
+        ////////////////
+        //ADD ALIAS   //
+        ////////////////
+        if(!indexExists) {
+            ModifyAliases modifyAliases = new ModifyAliases.Builder(
+                    new AddAliasMapping
+                            .Builder(
+                            "raja_index_testing_" + businessDateMonthYear,
+                            "raja_index_testing"
+                    )
+                            .build())
+                    .build();
+
+            JestResult assignAliasResult = client.execute(modifyAliases);
+            System.out.println("Alias assigned : " + assignAliasResult.isSucceeded());
+        }
+
+        /////////////////////////////////////
+        //SEARCH DOCUMENTS                 //
+        //NOTE, WE'RE READING ON THE ALIAS //
+        //AND NOT ON THE INDEX NAME        //
+        /////////////////////////////////////
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder().query(QueryBuilders.fuzzyQuery("ID", ID1));
+        Search search = (Search) new Search.Builder(searchSourceBuilder.toString())
+                // multiple index or types can be added.
+                .addIndex("raja_index_testing")
+                .addType("product")
+                .build();
+
+        JestResult searchResult = client.execute(search);
+        System.out.println("Which Index " + Id1 + " in : " + ((SearchResult) searchResult).getHits(Product.class).get(0).index);
+	
+	/*
+	private static void elasticSearch(JestClient client, String indexName, String type, String query) {
+	SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+	QueryStringQueryBuilder queryStringQueryBuilder = QueryBuilders.queryStringQuery(query);
+	searchSourceBuilder.query(queryStringQueryBuilder);
+	Search searchElastic = (Search) new Search.Builder(searchSourceBuilder.toString())
+			// multiple index or types can be added.
+			.addIndex(indexName).addType(type).build();
+
+	try {
+		SearchResult elasticRs = client.execute(searchElastic);
+
+		List<Hit<Article, Void>> hits = elasticRs.getHits(Product.class);
+		for (Hit<Article, Void> hit : hits) {
+			Product product = hit.source;
+			System.out.println("Elastic hits: " + product.toString());
+		}
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+	}
+	**/
+    }
+}
+//bool query to fetch exact data based on given criteria
+POST products_catalog/products/_search
+{
+    "query": {
+      "bool": {
+        "must": [
+        {
+          "terms": {
+            "countryCode.keyword": [
+              "SG"
+            ]
+          }
+        },
+        {
+          "terms": {
+            "customerId.keyword": [
+             "2342342"
+            ]
+          }
+        },  
+        {
+          "terms": {
+            "dealRefNo.keyword": [
+              "W00001"
+            ]
+          }
+        }
+      ]
+      }
+    }
+  }
+  //end
+
+//src/main/resources folder - raja_mapping.json
+{
+  "properties": {
+    "@timestamp": {
+      "type": "date"
+    },
+    "@version": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "null_value": "NULL",
+          "ignore_above": 256
+        }
+      }
+    },
+    "name": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "null_value": "NULL",
+          "ignore_above": 256
+        }
+      }
+    },
+    "amount": {
+      "type": "scaled_float",
+      "scaling_factor": 100
+    },
+    "amt_ccy": {
+      "type": "scaled_float",
+      "scaling_factor": 100
+    },
+    "bizdate": {
+      "type": "date"
+    }
+  }
+}
+##################ANGULAR#############
+Life cycle hooks
+Routing
+Lazy loading
+Dependency injection
+Difference between Angularjs(1) vs Angular (2)
+Obsevables vs Promise
+Service
+Component to Component communication
+Component vs Directive
+Whats is Ngmodule
+Imports vs Declarations in module file
+@viewchild & @contentchild
+Routeroutlet
+Rxjs concepts
+How do you call a rest service
+Input vs Output
+Form validations
+Reactive form
+Behavioural Subject
+Pipes
+Httpclient
+Parent child components unayi ela data pass chesthav
+Authguards concept chusuko
+Routing chesetappudu data ela pass chesthav
+Routing ni condition based ela restrict chesthav
+Security implementation while calling rest service - JWT token implementation
+map vs subscribe
